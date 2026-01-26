@@ -38,11 +38,18 @@ useEffect(() => {
 
 
 const handleSave = async () => {
+  const nome = window.prompt("Digite seu nome para registrar o salvamento:");
+  if (!nome || !nome.trim()) {
+    alert("Salvamento cancelado (nome não informado).");
+    return;
+  }
+
   try {
     await saveAllData({
       products,
       candidates,
       history,
+      savedBy: nome.trim(),
     });
     alert("Dados salvos no Google Drive com sucesso!");
   } catch (err: any) {
