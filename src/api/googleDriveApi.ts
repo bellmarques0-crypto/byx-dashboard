@@ -14,7 +14,10 @@ export async function saveAllData(data: {
 }) {
   const res = await fetch(API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    redirect: "follow",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8",
+    },
     body: JSON.stringify({
       action: "save",
       products: data.products,
@@ -27,3 +30,4 @@ export async function saveAllData(data: {
   if (!json.ok) throw new Error(json.error || "Erro ao salvar dados");
   return json;
 }
+
