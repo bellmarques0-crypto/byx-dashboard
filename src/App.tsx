@@ -23,16 +23,18 @@ useEffect(() => {
     try {
       const data = await loadAllData();
       setProducts(data.products || []);
-      setCandidates(data.candidates || []);
+      setCandidates(data.candidates || {});
       setHistory(data.history || []);
       console.log("Dados carregados do Google Drive com sucesso!");
     } catch (err: any) {
-    console.error(err);
-    alert("Erro ao salvar: " + (err?.message || JSON.stringify(err)));
+      console.error(err);
+      alert("Erro ao carregar do Google Drive: " + (err?.message || JSON.stringify(err)));
+    }
   }
 
   loadFromDrive();
 }, []);
+
 
 
 const handleSave = async () => {
@@ -43,9 +45,9 @@ const handleSave = async () => {
       history,
     });
     alert("Dados salvos no Google Drive com sucesso!");
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
-    alert("Erro ao salvar dados no Google Drive.");
+    alert("Erro ao salvar: " + (err?.message || JSON.stringify(err)));
   }
 };
 
