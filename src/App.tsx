@@ -26,10 +26,9 @@ useEffect(() => {
       setCandidates(data.candidates || []);
       setHistory(data.history || []);
       console.log("Dados carregados do Google Drive com sucesso!");
-    } catch (err) {
-      console.error("Erro ao carregar do Google Drive:", err);
-      alert("Erro ao carregar dados do Google Drive.");
-    }
+    } catch (err: any) {
+    console.error(err);
+    alert("Erro ao salvar: " + (err?.message || JSON.stringify(err)));
   }
 
   loadFromDrive();
