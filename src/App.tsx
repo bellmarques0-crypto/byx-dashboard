@@ -1,4 +1,4 @@
-
+import { loadAllData, saveAllData } from "./api/googleDriveApi";
 import React, { useState, useMemo, useEffect } from 'react';
 import { SummaryTable } from './components/SummaryTable';
 import { ProductDetailTable } from './components/ProductDetailTable';
@@ -18,33 +18,38 @@ const App: React.FC = () => {
   const [showSaveSuccess, setShowSaveSuccess] = useState(false);
 
   // Load data from localStorage on mount
-  useEffect(() => {
-    const savedProducts = localStorage.getItem('byx_products');
-    const savedCandidates = localStorage.getItem('byx_candidates');
-    const savedHistory = localStorage.getItem('byx_history');
+useEffect(() => {
+  async function loadFromDrive() {
+    try {
+      const data = await loadAllData();
+      setProducts(data.products || []);
+      setCandidates(data.candidates || []);
+      setHistory(data.history || []);
+      console.log("Dados carregados do Google Drive com sucesso!");
+    } catch (err) {
+      console.error("Erro ao carregar do Google Drive:", err);
+      alert("Erro ao carregar dados do Google Drive.");
+    }
+  }
 
-    if (savedProducts) {
-      try { setProducts(JSON.parse(savedProducts)); } catch (e) { console.error(e); }
-    }
-    if (savedCandidates) {
-      try { setCandidates(JSON.parse(savedCandidates)); } catch (e) { console.error(e); }
-    }
-    if (savedHistory) {
-      try { setHistory(JSON.parse(savedHistory)); } catch (e) { console.error(e); }
-    }
-  }, []);
+  loadFromDrive();
+}, []);
 
-  const handleSave = () => {
-    setIsSaving(true);
-    setTimeout(() => {
-      localStorage.setItem('byx_products', JSON.stringify(products));
-      localStorage.setItem('byx_candidates', JSON.stringify(candidates));
-      localStorage.setItem('byx_history', JSON.stringify(history));
-      setIsSaving(false);
-      setShowSaveSuccess(true);
-      setTimeout(() => setShowSaveSuccess(false), 3000);
-    }, 600);
-  };
+
+const handleSave = async () => {
+  try {
+    await saveAllData({
+      products,
+      candidates,
+      history,
+    });
+    alert("Dados salvos no Google Drive com sucesso!");
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao salvar dados no Google Drive.");
+  }
+};
+
 
   const handleUpdateProduct = (id: string, field: keyof ProductSummary, value: any) => {
     setProducts(prev => prev.map(p => p.id === id ? { ...p, [field]: value } : p));
