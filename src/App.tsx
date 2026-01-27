@@ -101,7 +101,7 @@ const handleSave = async () => {
         observacao: value,
         id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         produtoOrigem: productName,
-        dataAdmissaoRegistro: new Date().toLocaleDateString("pt-BR"),
+        dataAdmissaoRegistro: new Date().toISOString(),
       
         // novos campos (para desistência)
         tipo: isDesistencia ? "DESISTENCIA" : "ADMITIDO",
