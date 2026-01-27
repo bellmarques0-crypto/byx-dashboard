@@ -25,8 +25,8 @@ export const HistoryTable: React.FC<Props> = ({ data, onClearHistory }) => {
     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-12 animate-in fade-in duration-500">
       <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-purple-50/30">
         <div>
-          <h2 className="text-lg font-bold text-purple-900">Profissionais Admitidos</h2>
-          <p className="text-xs text-purple-700">Lista consolidada de candidatos que concluíram o processo.</p>
+          <h2 className="text-lg font-bold text-purple-900">Histórico</h2>
+          <p className="text-xs text-purple-700">Admitidos e desistências registradas.</p>
         </div>
         <button 
           onClick={handleClearClick}
