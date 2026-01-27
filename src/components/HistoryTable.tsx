@@ -6,6 +6,13 @@ interface Props {
   onClearHistory: () => void;
 }
 
+function formatDateBR(value?: string) {
+  if (!value) return "-";
+  const d = new Date(value);
+  if (isNaN(d.getTime())) return "-";
+  return d.toLocaleDateString("pt-BR");
+}
+
 function diffDays(start?: string, end?: string) {
   if (!start || !end) return "";
   const s = new Date(start);
@@ -113,20 +120,22 @@ export const HistoryTable: React.FC<Props> = ({ data, onClearHistory }) => {
                     </td>
 
                     <td className="px-6 py-2.5 border-b border-gray-100 text-center font-bold text-gray-700">
-                      {entry.admissao}
+                      {formatDateBR(entry.admissao)}
                     </td>
-
+                    
                     <td className="px-6 py-2.5 border-b border-gray-100 text-center font-bold text-gray-700">
-                      {entry.inicioOperacao}
+                      {formatDateBR(entry.inicioOperacao)}
                     </td>
+                    
                     <td className="px-6 py-2.5 border-b border-gray-100 text-center font-bold text-gray-700">
-                      {entry.inicioCurso || ""}
+                      {formatDateBR(entry.inicioCurso)}
                     </td>
-
+                    
                     {/* DATA DESISTÊNCIA */}
                     <td className="px-6 py-2.5 border-b border-gray-100 text-center font-bold text-gray-700">
-                      {dataDesistencia || "-"}
+                      {formatDateBR(entry.dataDesistencia)}
                     </td>
+
 
                     {/* MOTIVO DESISTÊNCIA */}
                     <td className="px-6 py-2.5 border-b border-gray-100 text-gray-700">
