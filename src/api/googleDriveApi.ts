@@ -59,22 +59,19 @@ export async function saveAllData(data: {
   history: any[];
   username: string;
   password: string;
-})
-
+}) {
   const res = await fetch(API_URL, {
     method: "POST",
     redirect: "follow",
     headers: { "Content-Type": "text/plain;charset=utf-8" },
-body: JSON.stringify({
-  action: "save",
-  username: data.username,
-  password: data.password,
-  products: data.products,
- candidates: flattenCandidates(data.candidates || {}),
-  history: data.history,
-}),
-
-
+    body: JSON.stringify({
+      action: "save",
+      username: data.username,
+      password: data.password,
+      products: data.products || [],
+      candidates: flattenCandidates(data.candidates || {}),
+      history: data.history || [],
+    }),
   });
 
   const json = await res.json();
