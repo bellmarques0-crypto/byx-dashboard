@@ -62,6 +62,7 @@ export const HistoryTable: React.FC<Props> = ({ data, onClearHistory }) => {
               <th className="px-6 py-3 border-r border-white/10">INSTRUTOR</th>
               <th className="px-6 py-3 border-r border-white/10 text-center">ADMISSÃO</th>
               <th className="px-6 py-3 border-r border-white/10 text-center">INÍCIO OPERAÇÃO</th>
+              <th className="px-6 py-3 border-r border-white/10 text-center">INÍCIO CURSO</th>
 
               {/* NOVAS COLUNAS (DESISTÊNCIA) */}
               <th className="px-6 py-3 border-r border-white/10 text-center">DATA DESISTÊNCIA</th>
@@ -117,6 +118,9 @@ export const HistoryTable: React.FC<Props> = ({ data, onClearHistory }) => {
 
                     <td className="px-6 py-2.5 border-b border-gray-100 text-center font-bold text-gray-700">
                       {entry.inicioOperacao}
+                    </td>
+                    <td className="px-6 py-2.5 border-b border-gray-100 text-center font-bold text-gray-700">
+                      {entry.inicioCurso || ""}
                     </td>
 
                     {/* DATA DESISTÊNCIA */}
