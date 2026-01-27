@@ -66,22 +66,6 @@ const handleSave = async () => {
   }
 };
 
-
-  try {
-    await saveAllData({
-      products,
-      candidates,
-      history,
-      savedBy: nome.trim(),
-    });
-    alert("Dados salvos no Google Drive com sucesso!");
-  } catch (err: any) {
-    console.error(err);
-    alert("Erro ao salvar: " + (err?.message || JSON.stringify(err)));
-  }
-};
-
-
   const handleUpdateProduct = (id: string, field: keyof ProductSummary, value: any) => {
     setProducts(prev => prev.map(p => p.id === id ? { ...p, [field]: value } : p));
   };
