@@ -73,34 +73,56 @@ const handleSave = async () => {
   const handleUpdateCandidate = (productId: string, index: number, field: keyof Candidate, value: any) => {
     const productName = products.find(p => p.id === productId)?.name || 'Desconhecido';
     
-    // Check for "ADMITIDO" trigger
-    if (field === 'observacao' && typeof value === 'string' && value.trim().toUpperCase() === 'ADMITIDO') {
-      const candidateToAdmit = candidates[productId]?.[index];
-      
-      if (candidateToAdmit && candidateToAdmit.nome.trim() !== '') {
-        // 1. Move to history
-        const newHistoryEntry: HistoryEntry = {
-          ...candidateToAdmit,
-          observacao: value,
-          id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-          produtoOrigem: productName,
-          dataAdmissaoRegistro: new Date().toLocaleDateString('pt-BR')
-        };
-        setHistory(prev => [...prev, newHistoryEntry]);
+    // Check for "ADMITIDO/DESISTENCIA" trigger
+    if (field === 'observacao' && typeof value === 'string') {
+  const obs = value.trim().toUpperCase();
 
-        // 2. Clear candidate from the table row
-        setCandidates(prev => {
-          const productCandidates = [...(prev[productId] || [])];
-          productCandidates[index] = {
-            nome: '', horarioTrabalho: '', instrutor: '', horarioCurso: '',
-            inicioCurso: '', fimCurso: '', aso: '', admissao: '', inicioOperacao: '', observacao: ''
-          };
-          return { ...prev, [productId]: productCandidates };
-        });
+  const isAdmitido = obs === 'ADMITIDO';
+  const isDesistencia = obs === 'DESISTÊNCIA' || obs === 'DESISTENCIA';
 
-        return;
+  if (isAdmitido || isDesistencia) {
+    const candidateToMove = candidates[productId]?.[index];
+
+    if (candidateToMove && candidateToMove.nome.trim() !== '') {
+      // prompts extras só para desistência
+      let dataDesistencia = "";
+      let motivoDesistencia = "";
+
+      if (isDesistencia) {
+        dataDesistencia = window.prompt("Data da desistência (YYYY-MM-DD):") || "";
+        motivoDesistencia = window.prompt("Motivo da desistência:") || "";
       }
+
+      const newHistoryEntry: any = {
+        ...candidateToMove,
+        observacao: value,
+        id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        produtoOrigem: productName,
+        dataAdmissaoRegistro: new Date().toLocaleDateString('pt-BR'),
+
+        // novos campos (para desistência)
+        tipo: isDesistencia ? "DESISTENCIA" : "ADMITIDO",
+        dataDesistencia,
+        motivoDesistencia,
+      };
+
+      setHistory(prev => [...prev, newHistoryEntry]);
+
+      // limpar linha
+      setCandidates(prev => {
+        const productCandidates = [...(prev[productId] || [])];
+        productCandidates[index] = {
+          nome: '', horarioTrabalho: '', instrutor: '', horarioCurso: '',
+          inicioCurso: '', fimCurso: '', aso: '', admissao: '', inicioOperacao: '', observacao: ''
+        };
+        return { ...prev, [productId]: productCandidates };
+      });
+
+      return;
     }
+  }
+}
+
 
     setCandidates(prev => {
       const productCandidates = [...(prev[productId] || [])];
