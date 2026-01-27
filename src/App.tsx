@@ -38,11 +38,34 @@ useEffect(() => {
 
 
 const handleSave = async () => {
-  const nome = window.prompt("Digite seu nome para registrar o salvamento:");
-  if (!nome || !nome.trim()) {
-    alert("Salvamento cancelado (nome não informado).");
+  const username = window.prompt("Usuário:");
+  if (!username || !username.trim()) {
+    alert("Salvamento cancelado.");
     return;
   }
+
+  const password = window.prompt("Senha:");
+  if (!password || !password.trim()) {
+    alert("Salvamento cancelado.");
+    return;
+  }
+
+  try {
+    await saveAllData({
+      products,
+      candidates,
+      history,
+      username: username.trim(),
+      password: password.trim(),
+    });
+
+    alert("Dados salvos com sucesso!");
+  } catch (err: any) {
+    console.error(err);
+    alert("Erro ao salvar: " + (err?.message || JSON.stringify(err)));
+  }
+};
+
 
   try {
     await saveAllData({
