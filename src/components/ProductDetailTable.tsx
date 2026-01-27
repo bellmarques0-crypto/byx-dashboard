@@ -1,3 +1,7 @@
+function formatDateOnly(dateStr: string) {
+  if (!dateStr) return "";
+  return new Date(dateStr).toLocaleDateString("pt-BR");
+}
 
 import React from 'react';
 import { Candidate } from '../types';
@@ -91,11 +95,13 @@ export const ProductDetailTable: React.FC<Props> = ({ productId, vagas, candidat
                   {renderCell(idx, 'horarioCurso')}
                 </td>
                 <td className="px-6 py-3 border-b border-emerald-100 bg-emerald-50/50 font-black text-black text-center">
-                  {renderCell(idx, 'inicioCurso')}
+                  {formatDateOnly(candidates[idx]?.inicioCurso ?? "")}
                 </td>
+
                 <td className="px-6 py-3 border-b border-gray-100 font-bold text-black text-center">
-                  {renderCell(idx, 'fimCurso')}
+                  {formatDateOnly(candidates[idx]?.fimCurso ?? "")}
                 </td>
+
                 <td className="px-6 py-3 border-b border-gray-100 font-bold text-black text-center">
                   {renderCell(idx, 'aso')}
                 </td>
@@ -113,7 +119,7 @@ export const ProductDetailTable: React.FC<Props> = ({ productId, vagas, candidat
             {vagas === 0 && (
               <tr>
                 <td colSpan={11} className="px-8 py-32 text-center text-black font-bold text-xl italic bg-gray-50/50">
-                  Nenhuma vaga cadastrada para este produto no Quadro Geral.
+                  Nenhuma vaga cadastrada para este produto.
                 </td>
               </tr>
             )}
