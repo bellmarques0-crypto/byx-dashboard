@@ -93,18 +93,22 @@ const handleSave = async () => {
         motivoDesistencia = window.prompt("Motivo da desistência:") || "";
       }
 
-      const newHistoryEntry: any = {
+            const newHistoryEntry: any = {
         ...candidateToMove,
+      
+        inicioCurso: candidateToMove.inicioCurso || "",
+      
         observacao: value,
         id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         produtoOrigem: productName,
-        dataAdmissaoRegistro: new Date().toLocaleDateString('pt-BR'),
-
+        dataAdmissaoRegistro: new Date().toLocaleDateString("pt-BR"),
+      
         // novos campos (para desistência)
         tipo: isDesistencia ? "DESISTENCIA" : "ADMITIDO",
         dataDesistencia,
         motivoDesistencia,
       };
+
 
       setHistory(prev => [...prev, newHistoryEntry]);
 
