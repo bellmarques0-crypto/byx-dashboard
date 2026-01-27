@@ -1,5 +1,5 @@
 const API_URL =
-  "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLjMfO2NlJlcZw7XMRStOpPY-NAKBJEKamWhBA_vuOIfxzr9UzGvso7U-ReskPRzFL_Hm6ltWt2-qaE6Dvdd7OHntLDMx_yJ_F3T4Hav3wfXGTHJBd6d4ksk252xB7RAQxq3TTA8mc2d0lqbntXa1IC06NGe8-pt9kcZRu8q-F0xGEVtoLJsY3R04bBPFa5jNAnhuqPMHcy3TXHKQKB4xFaY7eOJ13q5FU9ADbgM98n1YzYVWdZuy9hlA6ZqkUJKl-GFLF0Iwah9UcOT4hMhvDcCRsh1UJeFE_JVhjpz87_Hj-4On8Q&lib=MSMnv9-6QLNULCvvVpCX50xfyjpLQm4Ks";
+  "https://script.google.com/macros/s/AKfycbxIOHLLxjtOeUKvlKmP6LU1gjBKHacFOn8_I11I8a9pcH5SnGZ9kyivWag64wsnE1yWcA/exec";
 
 type CandidatesMap = Record<string, any[]>;
 
