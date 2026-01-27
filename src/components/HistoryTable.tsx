@@ -98,7 +98,7 @@ export const HistoryTable: React.FC<Props> = ({ data, onClearHistory }) => {
                     }
                   >
                     <td className="px-4 py-2.5 border-b border-gray-100 text-center font-bold text-purple-800">
-                      {entry.dataAdmissaoRegistro}
+                      {formatDateBR(entry.dataAdmissaoRegistro)}
                     </td>
 
                     <td className="px-6 py-2.5 border-b border-gray-100 font-bold text-black uppercase">
