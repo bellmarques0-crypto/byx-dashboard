@@ -212,7 +212,7 @@ const handleSave = async () => {
                     <h1 className="text-2xl font-bold text-black">
                       Vagas Disponíveis: {selectedProduct?.vagas} para {selectedProduct?.name}
                     </h1>
-                    <p className="text-black font-medium text-sm opacity-70">Digite "ADMITIDO" na coluna OBS para mover o candidato ao histórico.</p>
+                    <p className="text-black font-medium text-sm opacity-70">Apenas digite "ADMITIDO" ou "DESISTÊNCIA" após preencher tudo.</p>
                   </div>
                   <button 
                     onClick={handleGoHome}
@@ -233,7 +233,7 @@ const handleSave = async () => {
             {view === 'HISTORY' && (
               <div className="space-y-6 animate-in slide-in-from-bottom duration-300">
                 <header className="flex justify-between items-center">
-                  <h1 className="text-2xl font-bold text-black">Histórico de Admissões</h1>
+                  <h1 className="text-2xl font-bold text-black">Histórico</h1>
                   <button 
                     onClick={handleGoHome}
                     className="px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors shadow-sm"
