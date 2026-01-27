@@ -70,7 +70,7 @@ body: JSON.stringify({
   username: data.username,
   password: data.password,
   products: data.products,
-  candidates: data.candidates,
+ candidates: flattenCandidates(data.candidates || {}),
   history: data.history,
 }),
 
