@@ -6,10 +6,16 @@ interface Props {
   onClearHistory: () => void;
 }
 
-function formatDateBR(value?: string) {
+export function formatDateBR(value?: string) {
   if (!value) return "-";
+
+  // Se já estiver no formato BR, devolve como está
+  if (typeof value === "string" && value.includes("/")) return value;
+
+  // Aceita "YYYY-MM-DD" ou ISO
   const d = new Date(value);
   if (isNaN(d.getTime())) return "-";
+
   return d.toLocaleDateString("pt-BR");
 }
 
