@@ -1,5 +1,4 @@
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbw9suZC3kmxE0JqbkLthh9_6hIMlns7mfSJpaqGK6ZMFEpO1GmbaSvoVoLEPrZTopjQ-w/exec";
+const API_URL = "/api/byx";
 
 type CandidatesMap = Record<string, any[]>;
 
