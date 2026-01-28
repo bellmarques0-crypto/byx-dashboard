@@ -72,7 +72,15 @@ export async function saveAllData(data: {
       history: data.history || [],
     }),
   });
+//Histórico de salvamento
+  export async function loadSaveLogs() {
+  const res = await fetch(`${API_URL}?action=loadSaveLogs`);
+  const json = await res.json();
+  if (!json.ok) throw new Error(json.error || "Erro ao carregar logs");
+  return json.logs || [];
+}
 
+  
   const json = await res.json();
   if (!json.ok) throw new Error(json.error || "Erro ao salvar dados");
   return json;
