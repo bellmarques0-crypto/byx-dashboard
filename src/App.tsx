@@ -7,6 +7,8 @@ import { Sidebar } from './components/Sidebar';
 import { DashboardHeader } from './components/DashboardHeader';
 import { INITIAL_PRODUCTS, INITIAL_CANDIDATES } from './constants';
 import { ViewMode, ProductSummary, Candidate, HistoryEntry } from './types';
+//Histórico de salvamento
+const [saveLogs, setSaveLogs] = useState<any[]>([]);
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewMode>('SUMMARY');
@@ -34,8 +36,6 @@ useEffect(() => {
 
   loadFromDrive();
 }, []);
-
-
 
 const handleSave = async () => {
   const username = window.prompt("Usuário:");
