@@ -129,18 +129,54 @@ export const SummaryTable: React.FC<Props> = ({ data, onUpdate, onRowClick }) =>
     </tr>
   ))}
           </tbody>
-          <tfoot className="bg-[#1a1a1a] text-white font-bold text-center">
-            <tr>
-              <td className="px-4 py-3 border-r border-white/5 text-right" colSpan={1}>TOTAL GERAL:</td>
-              <td className="px-4 py-3 border-r border-white/5">{totals.hc}</td>
-              <td className="px-4 py-3 border-r border-white/5">{totals.pa}</td>
-              <td className="px-4 py-3 border-r border-white/5">{totals.hcGordura}</td>
-              <td className="px-4 py-3 border-r border-white/5">{totals.real}</td>
-              <td className="px-4 py-3 bg-blue-900/40 border-r border-white/5">{totals.vagas}</td>
-              <td className="px-4 py-3 bg-indigo-900/40 border-r border-white/5">{totals.emCurso}</td>
-              <td className="px-4 py-3 bg-slate-900/40">{totals.rs}</td>
-            </tr>
-          </tfoot>
+            <tfoot className="bg-[#1a1a1a] text-white font-bold text-center">
+      <tr>
+        {/* TOTAL GERAL (Produto) */}
+        <td className="px-4 py-3 border-r border-white/5 text-right">
+          TOTAL GERAL:
+        </td>
+    
+        {/* Jornada → sempre "-" */}
+        <td className="px-4 py-3 border-r border-white/5">
+          -
+        </td>
+    
+        {/* HC */}
+        <td className="px-4 py-3 border-r border-white/5">
+          {totals.hc}
+        </td>
+    
+        {/* PA */}
+        <td className="px-4 py-3 border-r border-white/5">
+          {totals.pa}
+        </td>
+    
+        {/* HC + gordura */}
+        <td className="px-4 py-3 border-r border-white/5">
+          {totals.hcGordura}
+        </td>
+    
+        {/* Real */}
+        <td className="px-4 py-3 border-r border-white/5">
+          {totals.real}
+        </td>
+    
+        {/* Vagas */}
+        <td className="px-4 py-3 bg-blue-900/40 border-r border-white/5">
+          {totals.vagas}
+        </td>
+    
+        {/* Em curso */}
+        <td className="px-4 py-3 bg-indigo-900/40 border-r border-white/5">
+          {totals.emCurso}
+        </td>
+    
+        {/* R&S */}
+        <td className="px-4 py-3 bg-slate-900/40">
+          {totals.rs}
+        </td>
+      </tr>
+    </tfoot>
         </table>
       </div>
     </div>
