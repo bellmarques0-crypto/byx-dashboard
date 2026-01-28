@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       res.setHeader("Content-Type", "application/json");
       return res.status(200).send(txt);
     }
-
+    
     if (req.method === "POST") {
       const r = await fetch(SCRIPT_URL, {
         method: "POST",
