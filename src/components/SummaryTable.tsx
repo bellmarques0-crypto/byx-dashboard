@@ -68,9 +68,10 @@ export const SummaryTable: React.FC<Props> = ({ data, onUpdate, onRowClick }) =>
       </td>
 
       {/* Jornada */}
-      <td className="px-4 py-3 border-b border-gray-200 text-center font-bold text-slate-800">
-        {row.jornada || "-"}
-      </td>
+       <td className="px-4 py-3 border-b border-gray-200 text-center font-bold text-slate-800">
+       {row.jornada && row.jornada.trim() !== "" ? row.jornada : "-"}
+       </td>
+
 
       {/* HC */}
       <td className="px-4 py-3 border-b border-gray-200 text-center">
