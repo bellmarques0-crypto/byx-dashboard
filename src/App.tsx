@@ -1,4 +1,4 @@
-import { loadAllData, saveAllData } from "./api/googleDriveApi";
+import { loadAllData, saveAllData, loadSaveLogs } from "./api/googleDriveApi";
 import React, { useState, useMemo, useEffect } from 'react';
 import { SummaryTable } from './components/SummaryTable';
 import { ProductDetailTable } from './components/ProductDetailTable';
@@ -7,8 +7,6 @@ import { Sidebar } from './components/Sidebar';
 import { DashboardHeader } from './components/DashboardHeader';
 import { INITIAL_PRODUCTS, INITIAL_CANDIDATES } from './constants';
 import { ViewMode, ProductSummary, Candidate, HistoryEntry } from './types';
-//Histórico de salvamento
-const [saveLogs, setSaveLogs] = useState<any[]>([]);
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewMode>('SUMMARY');
@@ -18,20 +16,26 @@ const App: React.FC = () => {
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [isSaving, setIsSaving] = useState(false);
   const [showSaveSuccess, setShowSaveSuccess] = useState(false);
-
+//Histórico de salvamento
+const [saveLogs, setSaveLogs] = useState<any[]>([]);
+  
   // Load data from localStorage on mount
 useEffect(() => {
   async function loadFromDrive() {
     try {
-      const data = await loadAllData();
-      setProducts(data.products || []);
-      setCandidates(data.candidates || {});
-      setHistory(data.history || []);
-      console.log("Dados carregados do Google Drive com sucesso!");
-    } catch (err: any) {
-      console.error(err);
-      alert("Erro ao carregar do Google Drive: " + (err?.message || JSON.stringify(err)));
-    }
+  const data = await loadAllData();
+  setProducts(data.products || []);
+  setCandidates(data.candidates || {});
+  setHistory(data.history || []);
+
+  const logs = await loadSaveLogs();
+  setSaveLogs(logs || []);
+
+  console.log("Dados carregados do Google Drive com sucesso!");
+} catch (err: any) {
+  console.error(err);
+  alert("Erro ao carregar do Google Drive: " + (err?.message || JSON.stringify(err)));
+}
   }
 
   loadFromDrive();
@@ -162,6 +166,12 @@ const handleSave = async () => {
     setView('HISTORY');
     setSelectedProductId(null);
   };
+
+  //Historico de salvamento
+const handleGoSaveLogs = () => {
+  setView("SAVE_LOGS");
+  setSelectedProductId(null);
+};
 
   const handleClearHistory = () => {
     // Atualiza estado e limpa storage imediatamente para ser definitivo
