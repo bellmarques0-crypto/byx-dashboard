@@ -27,7 +27,7 @@ export interface HistoryEntry extends Candidate {
   dataAdmissaoRegistro: string;
 }
 
-export type ViewMode = 'SUMMARY' | 'PRODUCT_DETAIL' | 'HISTORY';
+export type ViewMode = "SUMMARY" | "PRODUCT_DETAIL" | "HISTORY" | "SAVE_LOGS";
 
 export interface DashboardState {
   view: ViewMode;
