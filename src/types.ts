@@ -1,7 +1,6 @@
 export interface ProductSummary {
   id: string;
   name: string;
-  jornada: string; // 👈 NOVO
   hc: number;
   pa: number;
   hcGordura: number;
