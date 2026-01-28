@@ -267,23 +267,21 @@ const handleGoSaveLogs = () => {
             )}
 
             {view === "SAVE_LOGS" && (
-  <div className="space-y-6 animate-in slide-in-from-bottom duration-300">
-    <header className="flex justify-between items-center">
-      <h1 className="text-2xl font-bold text-black">Histórico de Salvamentos</h1>
-
-      <button
-        onClick={handleGoHome}
-        className="px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors shadow-sm"
-      >
-        Voltar para Capa
-      </button>
-    </header>
-
-    <SaveLogsTable data={saveLogs} />
-  </div>
-)}
-
+              <div className="space-y-6 animate-in slide-in-from-bottom duration-300">
+                <header className="flex justify-between items-center">
+                  <h1 className="text-2xl font-bold text-black">Histórico de Salvamentos</h1>
             
+                  <button
+                    onClick={handleGoHome}
+                    className="px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors shadow-sm"
+                  >
+                    Voltar para Capa
+                  </button>
+                </header>
+            
+                <SaveLogsTable data={saveLogs} />
+              </div>
+            )}
           </div>
         </main>
       </div>
