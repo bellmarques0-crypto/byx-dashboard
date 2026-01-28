@@ -8,6 +8,23 @@ type SaveLog = {
   qtdHistorico?: number | string;
 };
 
+function formatDateTimeBR(value?: string) {
+  if (!value) return "-";
+
+  const d = new Date(value);
+  if (isNaN(d.getTime())) return value; // se vier algo estranho, mostra como está
+
+  const dia = String(d.getDate()).padStart(2, "0");
+  const mes = String(d.getMonth() + 1).padStart(2, "0");
+  const ano = d.getFullYear();
+
+  const hora = String(d.getHours()).padStart(2, "0");
+  const min = String(d.getMinutes()).padStart(2, "0");
+  const seg = String(d.getSeconds()).padStart(2, "0");
+
+  return `${dia}/${mes}/${ano} ${hora}:${min}:${seg}`;
+}
+
 export const SaveLogsTable: React.FC<{ data: SaveLog[] }> = ({ data }) => {
   return (
     <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-12">
@@ -33,7 +50,7 @@ export const SaveLogsTable: React.FC<{ data: SaveLog[] }> = ({ data }) => {
               [...data].reverse().map((r, idx) => (
                 <tr key={idx} className={idx % 2 === 0 ? "bg-slate-50/40" : "bg-white"}>
                   <td className="px-4 py-2.5 border-b border-gray-100 font-bold text-slate-800">
-                    {r.dataHora || "-"}
+                    {formatDateTimeBR(r.dataHora)}
                   </td>
                   <td className="px-4 py-2.5 border-b border-gray-100 font-bold text-slate-900">
                     {r.nome || "-"}
