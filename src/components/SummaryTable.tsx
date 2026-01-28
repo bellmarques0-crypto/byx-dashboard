@@ -42,6 +42,7 @@ export const SummaryTable: React.FC<Props> = ({ data, onUpdate, onRowClick }) =>
           <thead className="bg-[#003366] text-white">
             <tr>
               <th className="px-4 py-3 font-semibold border-r border-white/10 min-w-[200px]">Produto</th>
+              <th className="px-4 py-3 font-semibold border-r border-white/10 text-center">Jornada</th>
               <th className="px-4 py-3 font-semibold border-r border-white/10 text-center">HC</th>
               <th className="px-4 py-3 font-semibold border-r border-white/10 text-center">PA</th>
               <th className="px-4 py-3 font-semibold border-r border-white/10 text-center">HC + gordura</th>
@@ -51,42 +52,82 @@ export const SummaryTable: React.FC<Props> = ({ data, onUpdate, onRowClick }) =>
               <th className="px-4 py-3 font-semibold bg-slate-800 text-center">R&S</th>
             </tr>
           </thead>
-          <tbody>
-            {data.map((row, idx) => (
-              <tr 
-                key={row.id} 
-                className={`${idx % 2 === 0 ? 'bg-blue-50/30' : 'bg-white'} hover:bg-gray-100 cursor-pointer`}
-                onClick={() => onRowClick(row.id)}
-              >
-                <td className="px-4 py-3 border-b border-gray-200 font-bold text-gray-700">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-blue-400"></span>
-                    {row.name}
-                  </div>
-                </td>
-                <td className="px-4 py-3 border-b border-gray-200 text-center">
-                  <EditableCell value={row.hc} id={row.id} field="hc" className="text-gray-700 font-medium" />
-                </td>
-                <td className="px-4 py-3 border-b border-gray-200 text-center">
-                  <EditableCell value={row.pa} id={row.id} field="pa" className="text-gray-700 font-medium" />
-                </td>
-                <td className="px-4 py-3 border-b border-gray-200 text-center">
-                  <EditableCell value={row.hcGordura} id={row.id} field="hcGordura" className="font-bold text-blue-900" />
-                </td>
-                <td className="px-4 py-3 border-b border-gray-200 text-center">
-                  <EditableCell value={row.real} id={row.id} field="real" className="font-bold text-indigo-800" />
-                </td>
-                <td className="px-4 py-3 border-b border-blue-700/20 text-center font-black text-white bg-blue-700/80">
-                  {row.vagas}
-                </td>
-                <td className="px-4 py-3 border-b border-indigo-900/20 text-center font-black text-white bg-indigo-800/80">
-                  {row.emCurso}
-                </td>
-                <td className="px-4 py-3 border-b border-slate-900/20 text-center font-black text-white bg-slate-700/80">
-                  {row.rs}
-                </td>
-              </tr>
-            ))}
+         <tbody>
+  {data.map((row, idx) => (
+    <tr 
+      key={row.id} 
+      className={`${idx % 2 === 0 ? 'bg-blue-50/30' : 'bg-white'} hover:bg-gray-100 cursor-pointer`}
+      onClick={() => onRowClick(row.id)}
+    >
+      {/* Produto */}
+      <td className="px-4 py-3 border-b border-gray-200 font-bold text-gray-700">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-blue-400"></span>
+          {row.name}
+        </div>
+      </td>
+
+      {/* Jornada */}
+      <td className="px-4 py-3 border-b border-gray-200 text-center font-bold text-slate-800">
+        {row.jornada || "-"}
+      </td>
+
+      {/* HC */}
+      <td className="px-4 py-3 border-b border-gray-200 text-center">
+        <EditableCell
+          value={row.hc}
+          id={row.id}
+          field="hc"
+          className="text-gray-700 font-medium"
+        />
+      </td>
+
+      {/* PA */}
+      <td className="px-4 py-3 border-b border-gray-200 text-center">
+        <EditableCell
+          value={row.pa}
+          id={row.id}
+          field="pa"
+          className="text-gray-700 font-medium"
+        />
+      </td>
+
+      {/* HC + gordura */}
+      <td className="px-4 py-3 border-b border-gray-200 text-center">
+        <EditableCell
+          value={row.hcGordura}
+          id={row.id}
+          field="hcGordura"
+          className="font-bold text-blue-900"
+        />
+      </td>
+
+      {/* Real */}
+      <td className="px-4 py-3 border-b border-gray-200 text-center">
+        <EditableCell
+          value={row.real}
+          id={row.id}
+          field="real"
+          className="font-bold text-indigo-800"
+        />
+      </td>
+
+      {/* Vagas */}
+      <td className="px-4 py-3 border-b border-blue-700/20 text-center font-black text-white bg-blue-700/80">
+        {row.vagas}
+      </td>
+
+      {/* Em curso */}
+      <td className="px-4 py-3 border-b border-indigo-900/20 text-center font-black text-white bg-indigo-800/80">
+        {row.emCurso}
+      </td>
+
+      {/* R&S */}
+      <td className="px-4 py-3 border-b border-slate-900/20 text-center font-black text-white bg-slate-700/80">
+        {row.rs}
+      </td>
+    </tr>
+  ))}
           </tbody>
           <tfoot className="bg-[#1a1a1a] text-white font-bold text-center">
             <tr>
