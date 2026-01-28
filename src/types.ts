@@ -1,4 +1,3 @@
-
 export interface ProductSummary {
   id: string;
   name: string;
@@ -24,10 +23,23 @@ export interface Candidate {
 export interface HistoryEntry extends Candidate {
   id: string;
   produtoOrigem: string;
+
+  // Data em que foi jogado para o histórico
   dataAdmissaoRegistro: string;
+
+  // Novo: diferencia ADMITIDO e DESISTÊNCIA
+  tipo: "ADMITIDO" | "DESISTENCIA";
+
+  // Só para desistência
+  dataDesistencia?: string;
+  motivoDesistencia?: string;
 }
 
-export type ViewMode = "SUMMARY" | "PRODUCT_DETAIL" | "HISTORY" | "SAVE_LOGS";
+export type ViewMode =
+  | "SUMMARY"
+  | "PRODUCT_DETAIL"
+  | "HISTORY"
+  | "SAVE_LOGS";
 
 export interface DashboardState {
   view: ViewMode;
