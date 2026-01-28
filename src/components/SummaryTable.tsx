@@ -74,7 +74,6 @@ export const SummaryTable: React.FC<Props> = ({ data, onUpdate, onRowClick }) =>
           <thead className="bg-[#003366] text-white">
             <tr>
               <th className="px-4 py-3 font-semibold border-r border-white/10 min-w-[200px]">Produto</th>
-              <th className="px-4 py-3 font-semibold border-r border-white/10 text-center">Jornada</th>
               <th className="px-4 py-3 font-semibold border-r border-white/10 text-center">HC</th>
               <th className="px-4 py-3 font-semibold border-r border-white/10 text-center">PA</th>
               <th className="px-4 py-3 font-semibold border-r border-white/10 text-center">HC + gordura</th>
@@ -98,17 +97,6 @@ export const SummaryTable: React.FC<Props> = ({ data, onUpdate, onRowClick }) =>
                     <span className="w-2 h-2 rounded-full bg-blue-400"></span>
                     {row.name}
                   </div>
-                </td>
-
-                {/* Jornada (editável, sempre HH:mm) */}
-                <td className="px-4 py-3 border-b border-gray-200 text-center font-bold text-slate-800">
-                  <EditableCell
-                    value={normalizeJornada((row as any).jornada) === "-" ? "" : normalizeJornada((row as any).jornada)}
-                    id={row.id}
-                    field={"jornada" as keyof ProductSummary}
-                    type="time"
-                    className="text-slate-800 font-bold"
-                  />
                 </td>
 
                 {/* HC */}
@@ -152,10 +140,6 @@ export const SummaryTable: React.FC<Props> = ({ data, onUpdate, onRowClick }) =>
           <tfoot className="bg-[#1a1a1a] text-white font-bold text-center">
             <tr>
               <td className="px-4 py-3 border-r border-white/5 text-right">TOTAL GERAL:</td>
-
-              {/* Jornada total sempre "-" */}
-              <td className="px-4 py-3 border-r border-white/5">-</td>
-
               <td className="px-4 py-3 border-r border-white/5">{totals.hc}</td>
               <td className="px-4 py-3 border-r border-white/5">{totals.pa}</td>
               <td className="px-4 py-3 border-r border-white/5">{totals.hcGordura}</td>
