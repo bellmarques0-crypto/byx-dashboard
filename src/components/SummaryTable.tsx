@@ -24,21 +24,6 @@ export const SummaryTable: React.FC<Props> = ({ data, onUpdate, onRowClick }) =>
     rs: acc.rs + curr.rs,
   }), { hc: 0, pa: 0, hcGordura: 0, real: 0, vagas: 0, emCurso: 0, rs: 0 });
 
-  // Normaliza jornada para mostrar sempre "HH:mm"
-  const normalizeJornada = (value: any) => {
-    const s = String(value ?? "").trim();
-    if (!s) return "-";
-
-    // Já está no formato HH:mm
-    if (/^\d{2}:\d{2}$/.test(s)) return s;
-
-    // Se vier ISO tipo 1899-12-30T09:26:28.000Z, extrai HH:mm
-    const isoMatch = s.match(/T(\d{2}):(\d{2})/);
-    if (isoMatch) return `${isoMatch[1]}:${isoMatch[2]}`;
-
-    return "-";
-  };
-
   const EditableCell = ({
     value,
     id,
