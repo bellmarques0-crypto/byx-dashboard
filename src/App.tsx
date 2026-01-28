@@ -7,6 +7,8 @@ import { Sidebar } from './components/Sidebar';
 import { DashboardHeader } from './components/DashboardHeader';
 import { INITIAL_PRODUCTS, INITIAL_CANDIDATES } from './constants';
 import { ViewMode, ProductSummary, Candidate, HistoryEntry } from './types';
+//Histórico de salvamento
+import { SaveLogsTable } from "./components/SaveLogsTable";
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewMode>('SUMMARY');
@@ -205,8 +207,17 @@ const handleGoSaveLogs = () => {
             {view === 'SUMMARY' && (
               <div className="space-y-6 animate-in fade-in duration-500">
                 <header>
-                  <h1 className="text-2xl font-bold text-black">Quadro de Necessidade de Contratação</h1>
-                </header>
+                <header className="flex items-center justify-between">
+  <h1 className="text-2xl font-bold text-black">Quadro de Necessidade de Contratação</h1>
+
+  <button
+    onClick={handleGoSaveLogs}
+    className="px-4 py-2 text-sm font-bold text-white bg-slate-800 rounded-lg hover:bg-slate-900 transition"
+  >
+    Histórico de Salvamentos
+  </button>
+</header>
+
                 <SummaryTable 
                   data={productDataWithCalculations} 
                   onUpdate={handleUpdateProduct}
@@ -254,6 +265,25 @@ const handleGoSaveLogs = () => {
                 <HistoryTable data={history} onClearHistory={handleClearHistory} />
               </div>
             )}
+
+            {view === "SAVE_LOGS" && (
+  <div className="space-y-6 animate-in slide-in-from-bottom duration-300">
+    <header className="flex justify-between items-center">
+      <h1 className="text-2xl font-bold text-black">Histórico de Salvamentos</h1>
+
+      <button
+        onClick={handleGoHome}
+        className="px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors shadow-sm"
+      >
+        Voltar para Capa
+      </button>
+    </header>
+
+    <SaveLogsTable data={saveLogs} />
+  </div>
+)}
+
+            
           </div>
         </main>
       </div>
