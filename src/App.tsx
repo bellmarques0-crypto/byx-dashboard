@@ -228,28 +228,28 @@ const App: React.FC = () => {
 
         <main className="flex-1 bg-gray-50 p-6 overflow-auto custom-scrollbar">
           <div className="max-w-7xl mx-auto">
-            {view === "SUMMARY" && (
-              <div className="space-y-6 animate-in fade-in duration-500">
-                <header className="flex items-center justify-between">
-                  <h1 className="text-2xl font-bold text-black">
-                    Quadro de Necessidade de Contratação
-                  </h1>
+           {view === "SUMMARY" && (
+  <div className="space-y-6 animate-in fade-in duration-500">
+    <header className="flex items-center justify-between">
+      <h1 className="text-2xl font-bold text-black">
+        Quadro de Necessidade de Contratação
+      </h1>
 
-                  <button
-                    onClick={handleGoSaveLogs}
-                    className="px-4 py-2 text-sm font-bold text-white bg-slate-800 rounded-lg hover:bg-slate-900 transition"
-                  >
-                    Histórico de Salvamentos
-                  </button>
-                </header>
+      <button
+        onClick={handleGoSaveLogs}
+        className="px-4 py-2 text-sm font-bold text-white bg-slate-800 rounded-lg hover:bg-slate-900 transition"
+      >
+        Histórico de Salvamentos
+      </button>
+    </header>
 
-                <SummaryTable
-                  data={productDataWithCalculations}
-                  onUpdate={handleUpdateProduct}
-                  onRowClick={handleProductSelect}
-                />
-              </div>
-            )}
+    <SummaryTable
+      data={productDataWithCalculations}
+      onUpdate={handleUpdateProduct}
+      onRowClick={handleProductSelect}
+    />
+  </div>
+)}
 
             {view === "PRODUCT_DETAIL" && (
               <div className="space-y-6 animate-in slide-in-from-right duration-300">
