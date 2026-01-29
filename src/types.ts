@@ -24,13 +24,11 @@ export interface HistoryEntry extends Candidate {
   id: string;
   produtoOrigem: string;
 
-  // Data em que foi jogado para o histórico
+  productIdOrigem: string; // ✅ NOVO (pra devolver pro quadro certo)
+
   dataAdmissaoRegistro: string;
 
-  // Novo: diferencia ADMITIDO e DESISTÊNCIA
   tipo: "ADMITIDO" | "DESISTENCIA";
-
-  // Só para desistência
   dataDesistencia?: string;
   motivoDesistencia?: string;
 }
