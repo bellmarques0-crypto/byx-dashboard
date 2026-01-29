@@ -341,7 +341,12 @@ const App: React.FC = () => {
                   </button>
                 </header>
 
-                <HistoryTable data={history} onClearHistory={handleClearHistory} />
+                   <HistoryTable 
+                    data={history} 
+                    onClearHistory={handleClearHistory} 
+                    onRestore={handleRestoreFromHistory}
+                  />
+
               </div>
             )}
 
