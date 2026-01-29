@@ -4,7 +4,9 @@ import { HistoryEntry } from "../types";
 interface Props {
   data: HistoryEntry[];
   onClearHistory: () => void;
+  onRestore: (historyId: string) => void; // ✅ novo
 }
+
 
 export function formatDateBR(value?: string) {
   if (!value) return "-";
@@ -81,8 +83,9 @@ export const HistoryTable: React.FC<Props> = ({ data, onClearHistory }) => {
               <th className="px-6 py-3 border-r border-white/10 text-center">DATA DESISTÊNCIA</th>
               <th className="px-6 py-3 border-r border-white/10">MOTIVO DESISTÊNCIA</th>
               <th className="px-6 py-3 border-r border-white/10 text-center">TEMPO EM TREINAMENTO</th>
-
               <th className="px-6 py-3">OBSERVAÇÕES</th>
+              <th className="px-6 py-3 text-center">AÇÕES</th>
+
             </tr>
           </thead>
 
@@ -156,6 +159,19 @@ export const HistoryTable: React.FC<Props> = ({ data, onClearHistory }) => {
                     <td className="px-6 py-2.5 border-b border-gray-100 italic text-gray-700">
                       {entry.observacao}
                     </td>
+
+                    <td className="px-6 py-2.5 border-b border-gray-100 text-center">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onRestore(entry.id);
+                        }}
+                        className="px-3 py-1 rounded bg-blue-600 text-white font-bold text-[10px] hover:bg-blue-700"
+                      >
+                        VOLTAR
+                      </button>
+                    </td>
+
                   </tr>
                 );
               })
