@@ -113,15 +113,20 @@ const App: React.FC = () => {
             motivoDesistencia = window.prompt("Motivo da desistência:") || "";
           }
 
-          const newHistoryEntry: any = {
+           const newHistoryEntry: any = {
             ...candidateToMove,
             id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
             produtoOrigem: productName,
+          
+            productIdOrigem: productId, // ✅ AQUI
+          
             dataAdmissaoRegistro: new Date().toLocaleDateString("pt-BR"),
+          
             tipo: isDesistencia ? "DESISTENCIA" : "ADMITIDO",
             dataDesistencia,
             motivoDesistencia,
-          };
+        };
+
 
           setHistory((prev) => [...prev, newHistoryEntry]);
 
@@ -205,6 +210,49 @@ const App: React.FC = () => {
     localStorage.setItem("byx_history", "[]");
   };
 
+  const handleRestoreFromHistory = (historyId: string) => {
+  const entry = history.find(h => h.id === historyId);
+  if (!entry) return;
+
+  const productId = entry.productIdOrigem;
+  if (!productId) {
+    alert("Não encontrei o produto de origem desse registro.");
+    return;
+  }
+
+  // 1) Remove do histórico
+  setHistory(prev => prev.filter(h => h.id !== historyId));
+
+  // 2) Devolve para o quadro de vagas (candidates)
+  setCandidates(prev => {
+    const list = [...(prev[productId] || [])];
+
+    // acha a primeira linha vazia (nome vazio)
+    const emptyIndex = list.findIndex(c => !c?.nome?.trim());
+
+    const candidateBack: any = {
+      nome: entry.nome || "",
+      horarioTrabalho: entry.horarioTrabalho || "",
+      instrutor: entry.instrutor || "",
+      horarioCurso: entry.horarioCurso || "",
+      inicioCurso: entry.inicioCurso || "",
+      fimCurso: entry.fimCurso || "",
+      aso: entry.aso || "",
+      admissao: entry.admissao || "",
+      inicioOperacao: entry.inicioOperacao || "",
+      observacao: "", // volta “limpo” (pra não virar ADMITIDO/DESISTÊNCIA de novo)
+    };
+
+    if (emptyIndex >= 0) list[emptyIndex] = candidateBack;
+    else list.push(candidateBack);
+
+    return { ...prev, [productId]: list };
+  });
+
+  alert("Registro devolvido ao quadro de vagas ✅");
+};
+
+  
   const selectedProduct = productDataWithCalculations.find((p) => p.id === selectedProductId);
 
   return (
