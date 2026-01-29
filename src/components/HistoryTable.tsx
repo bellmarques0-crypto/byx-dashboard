@@ -31,7 +31,8 @@ function diffDays(start?: string, end?: string) {
   return `${Math.max(0, days)} dia(s)`;
 }
 
-export const HistoryTable: React.FC<Props> = ({ data, onClearHistory }) => {
+export const HistoryTable: React.FC<Props> = ({ data, onClearHistory, onRestore }) => {
+
   const [isConfirming, setIsConfirming] = useState(false);
 
   const handleClearClick = () => {
@@ -177,7 +178,7 @@ export const HistoryTable: React.FC<Props> = ({ data, onClearHistory }) => {
               })
             ) : (
               <tr>
-                <td colSpan={11} className="px-8 py-20 text-center text-gray-400 font-medium italic">
+                <td colSpan={13} className="px-8 py-20 text-center text-gray-400 font-medium italic">
                   Nenhum registro encontrado.
                 </td>
               </tr>
