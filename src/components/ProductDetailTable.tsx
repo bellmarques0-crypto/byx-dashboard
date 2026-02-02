@@ -42,6 +42,9 @@ export const ProductDetailTable: React.FC<Props> = ({
     "14:00 ás 20:20 SEG-SAB",
   ];
 
+  // ✅ Lista de instrutores (dropdown)
+  const INSTRUTORES = ["VITORIA", "EMILLY"];
+
   const renderCell = (index: number, field: keyof Candidate, type = "text") => {
     const value = (candidates[index]?.[field] ?? "") as any;
     return (
@@ -72,6 +75,39 @@ export const ProductDetailTable: React.FC<Props> = ({
           {HORARIOS_TRABALHO.map((h) => (
             <option key={h} value={h}>
               {h}
+            </option>
+          ))}
+        </select>
+
+        <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-gray-500 group-hover:text-blue-600">
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </div>
+      </div>
+    );
+  };
+
+  // ✅ Instrutor como select (VITORIA/EMILLY)
+  const renderInstrutorSelect = (index: number) => {
+    const value = candidates[index]?.instrutor ?? "";
+    return (
+      <div className="relative group w-full">
+        <select
+          value={value}
+          onChange={(e) =>
+            onUpdateCandidate(productId, index, "instrutor", e.target.value)
+          }
+          className="w-full bg-transparent focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md px-2 py-1 text-[12px] text-black font-semibold transition-all cursor-pointer appearance-none pr-8 uppercase"
+        >
+          <option value="">Selecione...</option>
+          {INSTRUTORES.map((i) => (
+            <option key={i} value={i}>
+              {i}
             </option>
           ))}
         </select>
@@ -153,8 +189,9 @@ export const ProductDetailTable: React.FC<Props> = ({
                   {renderHorarioSelect(idx)}
                 </td>
 
-                <td className="px-6 py-3 border-b border-gray-100 font-bold text-black uppercase">
-                  {renderCell(idx, "instrutor")}
+                {/* ✅ INSTRUTOR agora é select */}
+                <td className="px-6 py-3 border-b border-gray-100 font-bold text-black">
+                  {renderInstrutorSelect(idx)}
                 </td>
 
                 <td className="px-6 py-3 border-b border-gray-100 font-bold text-black">
@@ -195,40 +232,45 @@ export const ProductDetailTable: React.FC<Props> = ({
                   />
                 </td>
 
-                <td className="px-6 py-3 border-b border-gray-100 font-bold text-black text-center">
-                 <input
-  type="date"
-  value={toDateInputValue(candidates[idx]?.aso ?? "")}
-  onChange={(e) =>
-    onUpdateCandidate(productId, idx, "aso", fromDateInputValue(e.target.value))
-  }
-  className="w-full bg-transparent focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md px-2 py-1 text-[12px] text-black font-semibold transition-all text-center"
-/>
-
-                </td>
-
-                <td className="px-6 py-3 border-b border-gray-100 font-bold text-black text-center">
-                 <input
-  type="date"
-  value={toDateInputValue(candidates[idx]?.admissao ?? "")}
-  onChange={(e) =>
-    onUpdateCandidate(productId, idx, "admissao", fromDateInputValue(e.target.value))
-  }
-  className="w-full bg-transparent focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md px-2 py-1 text-[12px] text-black font-semibold transition-all text-center"
-/>
-
-                </td>
-
+                {/* ASO (date) */}
                 <td className="px-6 py-3 border-b border-gray-100 font-bold text-black text-center">
                   <input
-  type="date"
-  value={toDateInputValue(candidates[idx]?.inicioOperacao ?? "")}
-  onChange={(e) =>
-    onUpdateCandidate(productId, idx, "inicioOperacao", fromDateInputValue(e.target.value))
-  }
-  className="w-full bg-transparent focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md px-2 py-1 text-[12px] text-black font-semibold transition-all text-center"
-/>
+                    type="date"
+                    value={toDateInputValue(candidates[idx]?.aso ?? "")}
+                    onChange={(e) =>
+                      onUpdateCandidate(productId, idx, "aso", fromDateInputValue(e.target.value))
+                    }
+                    className="w-full bg-transparent focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md px-2 py-1 text-[12px] text-black font-semibold transition-all text-center"
+                  />
+                </td>
 
+                {/* ADMISSÃO (date) */}
+                <td className="px-6 py-3 border-b border-gray-100 font-bold text-black text-center">
+                  <input
+                    type="date"
+                    value={toDateInputValue(candidates[idx]?.admissao ?? "")}
+                    onChange={(e) =>
+                      onUpdateCandidate(productId, idx, "admissao", fromDateInputValue(e.target.value))
+                    }
+                    className="w-full bg-transparent focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md px-2 py-1 text-[12px] text-black font-semibold transition-all text-center"
+                  />
+                </td>
+
+                {/* INÍCIO OPERAÇÃO (date) */}
+                <td className="px-6 py-3 border-b border-gray-100 font-bold text-black text-center">
+                  <input
+                    type="date"
+                    value={toDateInputValue(candidates[idx]?.inicioOperacao ?? "")}
+                    onChange={(e) =>
+                      onUpdateCandidate(
+                        productId,
+                        idx,
+                        "inicioOperacao",
+                        fromDateInputValue(e.target.value)
+                      )
+                    }
+                    className="w-full bg-transparent focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md px-2 py-1 text-[12px] text-black font-semibold transition-all text-center"
+                  />
                 </td>
 
                 <td className="px-6 py-3 border-b border-gray-100 italic font-medium text-black">
