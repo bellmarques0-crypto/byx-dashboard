@@ -5,8 +5,8 @@ export const INITIAL_PRODUCTS: ProductSummary[] = [
   { id: 'cartao', name: 'Cartão 6h20', hc: 0, pa: 0, hcGordura: 0, real: 0 },
   { id: 'cartao', name: 'Cartão 8h12', hc: 0, pa: 0, hcGordura: 0, real: 0 },
   { id: 'cartao', name: 'Cartão WPP', hc: 0, pa: 0, hcGordura: 0, real: 0 },
-  { id: 'emprestimos', name: 'Empréstimos 6h20', hc: 8, pa: 6, hcGordura: 0, real: 0 },
-  { id: 'emprestimos', name: 'Empréstimos 8h12', hc: 8, pa: 6, hcGordura: 0, real: 0 },
+  { id: 'emprestimos', name: 'Empréstimos 6h20', hc: 0, pa: 0, hcGordura: 0, real: 0 },
+  { id: 'emprestimos', name: 'Empréstimos 8h12', hc: 0, pa: 0, hcGordura: 0, real: 0 },
   { id: 'retencao', name: 'Retenção', hc: 0, pa: 0, hcGordura: 0, real: 0 },
   { id: 'pine', name: 'Pine', hc: 0, pa: 0, hcGordura: 0, real: 0 },
 ];
